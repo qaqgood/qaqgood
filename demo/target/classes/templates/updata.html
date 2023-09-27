@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>更新数据</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <style>
+     * {
+         text-decoration: none;
+     }
+     body {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         height: 100vh;
+         margin: 0;
+         font-size: 18px;
+         text-align: center;
+     }
+
+
+     label {
+         display: block;
+         margin-bottom: 10px;
+         font-size: 1.5em;
+         text-align: left;
+     }
+
+     input[type="text"] {
+         width: 100%;
+         padding: 10px;
+         font-size: 1.2em;
+         border: 1px solid #ccc;
+         border-radius: 5px;
+         margin-bottom: 20px;
+     }
+
+     button[type="submit"] {
+         display: inline-block;
+         padding: 10px 20px;
+         background-color: #007bff;
+         color: #fff;
+         text-decoration: none;
+         border-radius: 5px;
+         font-size: 1.2em;
+         cursor: pointer;
+         margin-top: 20px;
+     }
+
+
+     a[href="/getPage"] {
+         display: block;
+         margin-top: 20px;
+         font-size: 1.2em;
+         text-align: center;
+     }
+
+ </style>
+</head>
+<body>
+<h1>输入更新数据</h1>
+<form th:action="@{/updataok}" method="post" th:object="${phoneType}">
+    <input type="hidden" th:field="*{type_id}" /> <!-- 隐藏字段用于传递ID -->
+
+    <div>
+        <label for="numberPart">Number Part:</label>
+        <input type="text" id="numberPart" th:field="*{number_part}" placeholder="请输入Number Part" />
+    </div>
+    <div>
+        <label for="typeName">Type Name:</label>
+        <input type="text" id="typeName" th:field="*{type_name}" placeholder="请输入Type Name" />
+    </div>
+    <div>
+        <label for="typeRemark">Type Remark:</label>
+        <input type="text" id="typeRemark" th:field="*{type_remark}" placeholder="请输入Type Remark" />
+    </div>
+
+    <button type="submit">更新</button>
+</form>
+<a href="/getPage">返回首页</a>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>弹窗示例</title>
+</head>
+
+<body>
+<!--
+<button id="openPopupButton" onclick="openPopup()">打开弹窗</button>
+<div id="popup" class="popup" style="display: none;">
+    <form th:action="@{/create}" method="post">
+        number_part： <input type="text" id="number_part"name="number_part" th:value="${formData.number_part}" placeholder="请输入" /><br><br>
+        type_name:    <input type="text" id="type_name" name="type_name" th:value="${formData.type_name}" placeholder="请输入" /><br><br>
+        type_remark:  <input type="text" id="type_remark" name="type_remark" th:value="${formData.type_remark}" placeholder="请输入" /><br><br>
+        <input type="submit" value="提交">
+    </form>
+</div>
+
+<script th:inline="javascript">
+    /* 使用Thymeleaf表达式设置弹窗中的数据 */
+    var formData = {
+        number_part:null,
+        type_name: null,
+        type_remark:null
+    };
+
+    function openPopup() {
+        // 设置弹窗中的数据
+        document.getElementById("number_part").value = formData.number_part;
+        document.getElementById("type_name").value = formData.type_name;
+        document.getElementById("type_remark").value = formData.type_remark;
+        // 显示弹窗
+        document.getElementById("popup").style.display = "block";
+    }
+</script>
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ajax示例</title>
+</head>
+<body>
+<button>showModal</button>
+<dialog>
+    <form method="dialog" id="myForm">
+        <div>
+            number_part： <input type="text" id="number_part"  placeholder="请输入" /><br><br>
+            type_name:    <input type="text" id="type_name"   placeholder="请输入" /><br><br>
+            type_remark:  <input type="text" id="type_remark"   placeholder="请输入" /><br><br>
+        </div>
+        <button type="submit">提交</button>
+    </form>
+</dialog>
+
+<script>
+    var btn = document.querySelector('button')
+    var dialog = document.querySelector('dialog')
+    var form = document.getElementById('myForm');
+
+    btn.addEventListener('click', () => {
+        dialog.showModal();
+    })
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var a=document.getElementById('number_part').value;
+          console.log(a);
+
+
+
+        var phone_type  = {
+            number_part: document.getElementById('number_part').value,
+            type_name: document.getElementById('type_name').value,
+            type_remark: document.getElementById('type_remark').value
+        };
+      console.log(phone_type);
+
+        fetch('/create', {
+            method: 'POST',
+            body:JSON.stringify(phone_type),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('成功发送数据到后端：', data);
+                // 在这里可以根据后端的响应执行其他操作
+            })
+            .catch(error => {
+                console.error('发送数据时出错：', error);
+            });
+
+        dialog.close(); // 关闭弹窗
+    });
+</script>
+</body>
+</html>
+
+</body>
+</html>
+
+
+

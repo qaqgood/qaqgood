@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>首页</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<br>
+<br/>
+<div>
+  <br>
+
+  <table border="1" style="text-align: center;margin: auto;">
+    <caption>PHONE管理         <a th:href="@{/tocreate}">添加</a></caption>
+    <thead>
+    <tr>
+      <th>type_id</th>
+      <th>number_part</th>
+      <th>type_name</th>
+      <th>type_remark</th>
+      <th>功能</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="Phone:${page.list}">
+      <td th:text="${Phone.type_id}"></td>
+      <td th:text="${Phone.number_part}"></td>
+      <td th:text="${Phone.type_name}"></td>
+      <td th:text="${Phone.type_remark}"></td>
+      <td>
+        <a th:href="@{/delete/{id}(id=${Phone.type_id})}" onclick="return confirm('确定删除吗？')">删除</a>
+        <a th:href="@{/updata/{id}(id=${Phone.type_id})}">编辑</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<!--引入page.html分页模板-->
+<div th:insert="page::page"></div>
+</body>
+</html>

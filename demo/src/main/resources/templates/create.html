@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>添加数据</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="createstyle.css">
+</head>
+<body>
+<h1>输入添加数据</h1>
+<div>
+<form method="dialog" id="myForm">
+  <div>
+    <label>number_part：</label> <input type="text" id="number_part"  placeholder="请输入" /><br><br>
+    <label>type_name:</label>    <input type="text" id="type_name"   placeholder="请输入" /><br><br>
+      <label >type_remark:</label>  <input type="text" id="type_remark"   placeholder="请输入" /><br><br>
+  </div>
+  <button type="submit">提交</button>
+</form>
+<a href="/getPage">返回首页</a>
+</div>
+<script>
+  var dialog = document.querySelector('dialog')
+  var form = document.getElementById('myForm');
+
+
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+
+
+    var phone_type  = {
+      number_part: document.getElementById('number_part').value,
+      type_name: document.getElementById('type_name').value,
+      type_remark: document.getElementById('type_remark').value
+    };
+    console.log(phone_type);
+
+    fetch('/create', {
+      method: 'POST',
+      body:JSON.stringify(phone_type),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+  });
+</script>
+</body>
+</html>
